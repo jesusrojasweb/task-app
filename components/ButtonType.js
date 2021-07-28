@@ -1,16 +1,21 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity} from 'react-native'
 import {Text} from 'react-native-elements'
+import {FontAwesome} from '@expo/vector-icons'
+
 import { colorLight, fontSemiBold } from '../screens/styles/variables'
 
-const ButtonType = ({title,type,onPress,styleParentButton = {}, styleParentText = {}}) => {
+const ButtonType = ({title,type,onPress,styleParentButton = {}, styleParentText = {}, icon}) => {
     return (
         <TouchableOpacity
             title={title}
             onPress={onPress}
             style={styles(styleParentButton,styleParentText,type).button}
         >
-            <Text style={styles(styleParentButton,styleParentText,type).btnText}>{title}</Text>
+            <Text style={styles(styleParentButton,styleParentText,type).btnText}>
+                {icon && <FontAwesome name={icon} size={16} color={colorLight} />}
+                {` ${title}`}
+            </Text>
         </TouchableOpacity>
     )
 }

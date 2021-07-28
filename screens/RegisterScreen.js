@@ -3,7 +3,10 @@ import { View, Text,TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ButtonType from '../components/ButtonType'
 import Inputs from '../components/Inputs'
-import { registerScreenStyles } from './styles/registerScreenStyles'
+import { sesionScreenStyles } from './styles/sesionScreenStyles'
+
+import {auth} from '../firebase'
+import { useAuth } from '../hooks/useAuth'
 
 const RegisterScreen = ({navigation}) => {
 
@@ -17,10 +20,23 @@ const RegisterScreen = ({navigation}) => {
         })
     })
 
+    useAuth()
+
+    const handleRegister = () => {
+        auth.createUserWithEmailAndPassword(email.trim(),password)
+        .then(authUser => {
+            authUser.user.updateProfile({
+                displayName: name.trim(),
+                photoURL: 'https://secure.gravatar.com/avatar/4a173bccee235e94b623d6abd2661076?s=26&d=mm'
+            })
+        }).catch(error => alert(error.message))
+    }
+    
+
     return (
         <KeyboardAwareScrollView
             resetScrollToCoords={{ x: 0, y: 0 }}
-            contentContainerStyle={registerScreenStyles.background}
+            contentContainerStyle={sesionScreenStyles.background}
             scrollEnabled
         >
             <Inputs
@@ -40,7 +56,7 @@ const RegisterScreen = ({navigation}) => {
             <Inputs
                 labelText="Contraseña"
                 placeholder='***************'
-                type="text"
+                type="password"
                 value={password}
                 onChangeText={text => setPassword(text)}
                 secureTextEntry
@@ -48,17 +64,22 @@ const RegisterScreen = ({navigation}) => {
             <ButtonType
                 title="Crear Cuenta"
                 type="primary"
-                styleParentButton={registerScreenStyles.buttonPrimary}
-                styleParentText={registerScreenStyles.buttonText}
+                styleParentButton={sesionScreenStyles.buttonPrimary}
+                styleParentText={sesionScreenStyles.buttonText}
+                onPress={handleRegister}
             />
             <ButtonType
                 title="Sign up width Google"
-                styleParentText={registerScreenStyles.buttonText}
+                icon='google'
+                styleParentText={sesionScreenStyles.buttonText}
             />
-            <View style={registerScreenStyles.bottomTextContainer}>
+            <View style={sesionScreenStyles.bottomTextContainer}>
 
-                <Text style={registerScreenStyles.bottomText}>¿Ya tienes una cuenta?</Text>
-                <TouchableOpacity style={registerScreenStyles.touchable}><Text style={registerScreenStyles.touchableText}>Iniciar Sesión</Text></TouchableOpacity>
+                <Text style={sesionScreenStyles.bottomText}>¿Ya tienes una cuenta?</Text>
+                <TouchableOpacity 
+                    style={sesionScreenStyles.touchable}
+                    onPress={()=>navigation.navigate('Login')}
+                ><Text style={sesionScreenStyles.touchableText}>Iniciar Sesión</Text></TouchableOpacity>
             </View>
         </KeyboardAwareScrollView>
     )

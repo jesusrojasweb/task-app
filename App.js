@@ -14,6 +14,8 @@ import {
 import HomeScreen from './screens/HomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import { fontExtra } from './screens/styles/variables';
+import LoginScreen from './screens/LoginScreen';
+import DashboardScreen from './screens/DashboardScreen';
 
 const Stack = createStackNavigator();
 
@@ -50,10 +52,19 @@ export default function App() {
           <Stack.Screen
             name="Start"
             component={HomeScreen}
+            initialParams="Home"
           />
           <Stack.Screen
             name="Register"
             component={RegisterScreen}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+          />
+          <Stack.Screen
+            name="Home"
+            component={DashboardScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

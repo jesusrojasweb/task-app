@@ -1,7 +1,7 @@
 import { StyleSheet} from 'react-native'
 import { backgroundDefault, colorLight, fontRegular } from './variables'
 
-export const registerScreenStyles = StyleSheet.create({
+export const sesionScreenStyles = StyleSheet.create({
     background: {
         ...backgroundDefault,
         // height: '100%',

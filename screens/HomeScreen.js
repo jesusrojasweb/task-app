@@ -1,4 +1,4 @@
-import React, { Component, useLayoutEffect } from 'react'
+import React, { Component, useEffect, useLayoutEffect } from 'react'
 import {View } from 'react-native'
 import {Text} from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar';
@@ -6,6 +6,8 @@ import { StatusBar } from 'expo-status-bar';
 import Illustration from '../assets/Illustration'
 import { homeScreenStyles } from './styles/homeScreenStyles';
 import ButtonType from '../components/ButtonType';
+import { auth } from '../firebase';
+import { useAuth } from '../hooks/useAuth';
 
 function HomeScreen ({navigation}){
 
@@ -14,6 +16,8 @@ function HomeScreen ({navigation}){
             headerShown: false
         })
     },[navigation])
+
+    useAuth()
 
     const handleNavigate = (to) => {
         navigation.navigate(to)
@@ -37,6 +41,7 @@ function HomeScreen ({navigation}){
                     <ButtonType
                         title="Iniciar Sesión"
                         type="outline"
+                        onPress={()=> handleNavigate('Login')}
                     />
                 </View>
             </View>
