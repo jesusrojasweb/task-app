@@ -5,3 +5,8 @@ export const colorBackground = '#1D2535'
 export const fontRegular = 'Montserrat_400Regular'
 export const fontSemiBold = 'Montserrat_600SemiBold'
 export const fontExtra = 'Montserrat_800ExtraBold'
+
+export const backgroundDefault = {
+    backgroundColor: colorPrincipal,
+    paddingBottom: 40,
+}

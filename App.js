@@ -12,13 +12,26 @@ import {
 } from '@expo-google-fonts/montserrat';
 
 import HomeScreen from './screens/HomeScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import { fontExtra } from './screens/styles/variables';
 
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
-  headerStyle: {backgroundColor: '#0E121A'},
-  headerTitleStyle: {color: 'white'},
-  headerTintColor: 'white'
+  headerStyle: {
+    backgroundColor: '#0E121A',
+    elevation: 0,
+    shadowOpacity: 0,
+    borderBottomWidth: 0,
+  },
+  headerTitleStyle: {
+    color: 'white', 
+    textTransform: 'uppercase', 
+    fontFamily: fontExtra,
+    fontSize: 16
+  },
+  headerTintColor: 'white',
+  headerTitleAlign: 'center',
 }
 
 export default function App() {
@@ -37,6 +50,10 @@ export default function App() {
           <Stack.Screen
             name="Start"
             component={HomeScreen}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

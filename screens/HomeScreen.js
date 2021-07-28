@@ -15,6 +15,11 @@ function HomeScreen ({navigation}){
         })
     },[navigation])
 
+    const handleNavigate = (to) => {
+        navigation.navigate(to)
+    }
+    
+
     return (
         <View style={homeScreenStyles.background}>
             <View style={homeScreenStyles.illustration}>
@@ -27,6 +32,7 @@ function HomeScreen ({navigation}){
                     <ButtonType
                         title="Registrarme"
                         type="primary"
+                        onPress={()=> handleNavigate('Register')}
                     />
                     <ButtonType
                         title="Iniciar Sesión"
