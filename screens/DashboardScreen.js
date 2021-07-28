@@ -11,7 +11,7 @@ const DashboardScreen = ({navigation}) => {
             title: 'Tus proyectos',
             headerLeft: ()=>(
                 <TouchableOpacity
-                    onPress={signOutUser}
+                    onPress={()=> navigation.navigate('Profile')}
                     style={styles.photo}
                 >
                     <Avatar 
@@ -24,12 +24,6 @@ const DashboardScreen = ({navigation}) => {
             )
         })
     })
-
-    const signOutUser = () => {
-        auth.signOut().then(()=>{
-            navigation.replace('Login')
-        })
-    }
 
     return (
         <View>

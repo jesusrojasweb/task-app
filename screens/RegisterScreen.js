@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { View, Text,TouchableOpacity } from 'react-native'
+import { View, Text,TouchableOpacity, ActivityIndicator } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ButtonType from '../components/ButtonType'
 import Inputs from '../components/Inputs'
@@ -13,6 +13,7 @@ const RegisterScreen = ({navigation}) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     useLayoutEffect(()=>{
         navigation.setOptions({
@@ -20,7 +21,7 @@ const RegisterScreen = ({navigation}) => {
         })
     })
 
-    useAuth()
+    useAuth(navigation)
 
     const handleRegister = () => {
         auth.createUserWithEmailAndPassword(email.trim(),password)
@@ -61,6 +62,7 @@ const RegisterScreen = ({navigation}) => {
                 onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
+            {isLoading && <ActivityIndicator size="large" color="#FFFFFF"/>}
             <ButtonType
                 title="Crear Cuenta"
                 type="primary"

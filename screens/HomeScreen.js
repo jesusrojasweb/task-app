@@ -17,7 +17,7 @@ function HomeScreen ({navigation}){
         })
     },[navigation])
 
-    useAuth()
+    useAuth(navigation)
 
     const handleNavigate = (to) => {
         navigation.navigate(to)

@@ -16,6 +16,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import { fontExtra } from './screens/styles/variables';
 import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -65,6 +66,10 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={DashboardScreen}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity,ActivityIndicator } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ButtonType from '../components/ButtonType'
 import Inputs from '../components/Inputs'
@@ -11,6 +11,7 @@ const LoginScreen = ({navigation}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     useLayoutEffect(()=>{
         navigation.setOptions({
@@ -18,9 +19,10 @@ const LoginScreen = ({navigation}) => {
         })
     })
 
-    useAuth()
+    useAuth(navigation)
 
     const signIn = () => {
+        setIsLoading(true)
         auth.signInWithEmailAndPassword(email.trim(),password).catch(error => alert(error))
     }
     
@@ -47,6 +49,9 @@ const LoginScreen = ({navigation}) => {
                 onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
+
+            {isLoading && <ActivityIndicator size="large" color="#FFFFFF"/>}
+
             <View style={{marginTop: 40}}></View>
 
             <ButtonType
