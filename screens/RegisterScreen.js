@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { KeyboardAvoidingView } from 'react-native'
-import { TouchableOpacity } from 'react-native'
-import { View, Text } from 'react-native'
+import { View, Text,TouchableOpacity } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ButtonType from '../components/ButtonType'
 import Inputs from '../components/Inputs'
 import { registerScreenStyles } from './styles/registerScreenStyles'
@@ -19,7 +18,11 @@ const RegisterScreen = ({navigation}) => {
     })
 
     return (
-        <KeyboardAvoidingView behavior='padding' style={registerScreenStyles.background}>
+        <KeyboardAwareScrollView
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={registerScreenStyles.background}
+            scrollEnabled
+        >
             <Inputs
                 labelText="Tu nombre"
                 placeholder='Luis Lopez'
@@ -45,12 +48,19 @@ const RegisterScreen = ({navigation}) => {
             <ButtonType
                 title="Crear Cuenta"
                 type="primary"
+                styleParentButton={registerScreenStyles.buttonPrimary}
+                styleParentText={registerScreenStyles.buttonText}
             />
             <ButtonType
                 title="Sign up width Google"
+                styleParentText={registerScreenStyles.buttonText}
             />
-            <Text>¿Ya tienes una cuenta? <TouchableOpacity><Text>Iniciar Sesión</Text></TouchableOpacity></Text>
-        </KeyboardAvoidingView>
+            <View style={registerScreenStyles.bottomTextContainer}>
+
+                <Text style={registerScreenStyles.bottomText}>¿Ya tienes una cuenta?</Text>
+                <TouchableOpacity style={registerScreenStyles.touchable}><Text style={registerScreenStyles.touchableText}>Iniciar Sesión</Text></TouchableOpacity>
+            </View>
+        </KeyboardAwareScrollView>
     )
 }
 
