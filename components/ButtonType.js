@@ -29,7 +29,7 @@ const styles = (styleParentButton,styleParentText,type) => StyleSheet.create({
         borderWidth: 1,
         borderRadius: 8,
         paddingVertical: 14,
-        paddingHorizontal: 18,
+        paddingHorizontal: 16,
         borderColor: colorLight,
         backgroundColor: type === 'primary' ? colorLight : 'transparent',
         ...styleParentButton,

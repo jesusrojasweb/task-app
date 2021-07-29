@@ -53,7 +53,6 @@ export default function App() {
           <Stack.Screen
             name="Start"
             component={HomeScreen}
-            initialParams="Home"
           />
           <Stack.Screen
             name="Register"

@@ -24,12 +24,14 @@ const RegisterScreen = ({navigation}) => {
     useAuth(navigation)
 
     const handleRegister = () => {
+        setIsLoading(true)
         auth.createUserWithEmailAndPassword(email.trim(),password)
         .then(authUser => {
             authUser.user.updateProfile({
                 displayName: name.trim(),
                 photoURL: 'https://secure.gravatar.com/avatar/4a173bccee235e94b623d6abd2661076?s=26&d=mm'
             })
+            
         }).catch(error => alert(error.message))
     }
     
@@ -70,11 +72,11 @@ const RegisterScreen = ({navigation}) => {
                 styleParentText={sesionScreenStyles.buttonText}
                 onPress={handleRegister}
             />
-            <ButtonType
-                title="Sign up width Google"
-                icon='google'
+            {/* <ButtonType
+                title="Iniciar Sesión con Google"
                 styleParentText={sesionScreenStyles.buttonText}
-            />
+                icon='google'
+            /> */}
             <View style={sesionScreenStyles.bottomTextContainer}>
 
                 <Text style={sesionScreenStyles.bottomText}>¿Ya tienes una cuenta?</Text>
@@ -83,6 +85,7 @@ const RegisterScreen = ({navigation}) => {
                     onPress={()=>navigation.navigate('Login')}
                 ><Text style={sesionScreenStyles.touchableText}>Iniciar Sesión</Text></TouchableOpacity>
             </View>
+            <View style={{paddingBottom: 40}}></View>
         </KeyboardAwareScrollView>
     )
 }

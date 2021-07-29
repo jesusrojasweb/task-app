@@ -17,12 +17,14 @@ const LoginScreen = ({navigation}) => {
         navigation.setOptions({
             title:'Iniciar Sesión'
         })
-    })
+    },[navigation])
 
     useAuth(navigation)
 
     const signIn = () => {
+        
         setIsLoading(true)
+
         auth.signInWithEmailAndPassword(email.trim(),password).catch(error => alert(error))
     }
     
@@ -61,11 +63,11 @@ const LoginScreen = ({navigation}) => {
                 styleParentText={sesionScreenStyles.buttonText}
                 onPress={signIn}
             />
-            <ButtonType
+            {/* <ButtonType
                 title="Iniciar Sesión con Google"
                 styleParentText={sesionScreenStyles.buttonText}
                 icon='google'
-            />
+            /> */}
 
             <View style={{
                 ...sesionScreenStyles.bottomTextContainer,
@@ -80,7 +82,7 @@ const LoginScreen = ({navigation}) => {
                     <Text style={sesionScreenStyles.touchableText}>Crear cuenta</Text>
                 </TouchableOpacity>
             </View>
-
+            <View style={{paddingBottom: 60}}></View>
         </KeyboardAwareScrollView>
     )
 }

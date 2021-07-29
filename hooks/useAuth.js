@@ -10,5 +10,5 @@ export const useAuth = (navigation) => {
         })
     
         return unsubscrib
-    },[])    
+    },[[navigation]])    
 }
