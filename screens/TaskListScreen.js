@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import ButtonType from '../components/ButtonType'
+import TaskCard from '../components/TaskCard'
 import { auth, db } from '../firebase'
 import { colorPrincipal, fontExtra, fontRegular } from './styles/variables'
 
@@ -38,7 +39,10 @@ const TaskListScreen = ({navigation,route}) => {
 
                 {
                     tasks.map(({id, data})=>(
-                        <Text style={{color: 'white'}}>Tarea</Text>
+                        <TaskCard
+                            key={id}
+                            {...data}
+                        />
                     ))
                 }
 
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
     projectName:{
         color: 'white',
         fontFamily: fontExtra,
-        fontSize: 20
+        fontSize: 20,
+        marginBottom: 30,
     }
 })

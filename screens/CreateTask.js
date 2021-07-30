@@ -34,7 +34,8 @@ const CreateTask = ({navigation,route}) => {
             focus,
             rest,
             projectId: id,
-            date
+            date,
+            isCompleted: false
         }).then(()=>{
             navigation.goBack()
             setIsLoading(false)
