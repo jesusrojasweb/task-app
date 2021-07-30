@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { colorPrincipal, fontRegular } from './styles/variables'
 
 import ButtonType from '../components/ButtonType'
+import ProjectCard from '../components/ProjectCard'
 
 const ProjectsScreen = ({navigation, projects}) => {
 
@@ -16,21 +17,21 @@ const ProjectsScreen = ({navigation, projects}) => {
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: colorPrincipal}}>
-            <ScrollView contentContainerStyle={{}}>
+            <ScrollView contentContainerStyle={{paddingTop: 31}}>
 
                 {!thereProjects && (
                     <Text style={styles.textEmpty}>Aun no tienes proyectos</Text>
                 )}
                 {
-                    projects.map(({id,data:{name,icon}})=>(
-                        <Text key={id}>{icon} {name}</Text>
+                    projects.map(({id,data})=>(
+                        <ProjectCard key={id} id={id} {...data} />
                     ))
                 }
 
                 <ButtonType
                     title="Crear proyecto"
                     type='primary'
-                    styleParentButton={{marginHorizontal: 31}}
+                    styleParentButton={{marginHorizontal: 31,marginTop: 40}}
                     onPress={()=> navigation.navigate('Create Projects')}
                 />
 

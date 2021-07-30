@@ -21,6 +21,10 @@ import ProfileScreen from './screens/ProfileScreen';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import CreateProjects from './screens/CreateProjects';
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
+
 function getHeaderTitle(route) {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Proyectos';
 

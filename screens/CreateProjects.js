@@ -10,6 +10,29 @@ import {IconFamilies} from '../IconConstant'
 import ProfileCards from '../components/ProfileCards'
 import { auth, db } from '../firebase'
 
+const COLORS = [
+    'FF675D',
+    '3F53FF',
+    '21A2FF',
+    'EE4F92',
+    '008E82',
+    '155BE7',
+    'E70012',
+    'ECE833',
+    '1600B5',
+    '820075',
+    'F4903C',
+    '1FE6D5',
+    '5844EB',
+    '155BE7',
+    '3422B4',
+    '27179B',
+    '46DA41',
+    'B44822',
+    'E700B6',
+    '280CF4',
+]
+
 
 const CreateProjects = ({navigation}) => {
 
@@ -20,6 +43,8 @@ const CreateProjects = ({navigation}) => {
     const [searchData, setSearchData] = useState(icons)
     const [thereIcons, setThereIcons] = useState(false)
     const [iconChoosed, setIconChoosed] = useState('')
+    const [color, setColor] = useState('FF675D')
+    const [showColors, setShowColors] = useState(false)
 
     useLayoutEffect(()=>{
         navigation.setOptions({
@@ -64,8 +89,9 @@ const CreateProjects = ({navigation}) => {
 
             setIsLoading(true)
             await db.collection('dashboard').doc(auth.currentUser.uid).collection('projects').add({
-                name: name,
-                icon: iconChoosed
+                name,
+                icon: iconChoosed,
+                color
             })
             .then(()=>{
                 navigation.goBack()
@@ -122,6 +148,42 @@ const CreateProjects = ({navigation}) => {
                         ))
                     }
                 </View>
+                {!showColors && (
+
+                    <ProfileCards
+                        name="Elegir color"
+                        icon="paint-brush"
+                        onPress={()=> setShowColors(true)}
+                    />
+                )}
+                <View style={styles().iconList}>
+
+                    {
+                        showColors && COLORS.map((colorHex)=>(
+                            <TouchableOpacity 
+                                onPress={()=> setColor(colorHex)} 
+                                style={{
+                                    backgroundColor: `#${colorHex}`,
+                                    width: '16%',
+                                    height: 45,
+                                    marginRight: 10,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    padding: 4,
+                                    borderRadius: 100,
+                                    marginBottom: 8
+                                }}
+                            >
+                                {/* <Text style={{color: 'white'}}>{colorHex}</Text> */}
+                                {
+                                    colorHex === color && <FontAwesome name='check' size={15} color='white' />
+                                }
+                            </TouchableOpacity>
+                        ))
+                    }
+                </View>
+
+
                 
                 {isLoading && <ActivityIndicator size="large" color="#FFFFFF"/>}
 
@@ -162,5 +224,5 @@ const styles = (choosed) => StyleSheet.create({
         marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
 })
