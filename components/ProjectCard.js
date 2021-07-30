@@ -4,9 +4,9 @@ import {FontAwesome} from '@expo/vector-icons'
 import { colorBackground, colorText, fontRegular, fontSemiBold } from '../screens/styles/variables'
 import { TouchableOpacity } from 'react-native'
 
-const ProjectCard = ({icon, name, color}) => {
+const ProjectCard = ({icon, name, color, onPress}) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <View  style={styles.info} >
                 <View style={{
                     ...styles.icon,

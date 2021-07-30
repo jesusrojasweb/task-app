@@ -22,6 +22,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import CreateProjects from './screens/CreateProjects';
 
 import { LogBox } from 'react-native';
+import CreateTask from './screens/CreateTask';
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -94,6 +95,10 @@ export default function App() {
           <Stack.Screen
             name="Create Projects"
             component={CreateProjects}
+          />
+          <Stack.Screen
+            name="Create Tasks"
+            component={CreateTask}
           />
           <Stack.Screen
             name="Profile"

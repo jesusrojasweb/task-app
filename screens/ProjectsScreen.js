@@ -15,6 +15,14 @@ const ProjectsScreen = ({navigation, projects}) => {
 
     }, [projects])
 
+    const enterProject = (id,projectName) => {
+        navigation.navigate('Tareas',{
+            id,projectName
+        })
+    }
+    
+
+
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: colorPrincipal}}>
             <ScrollView contentContainerStyle={{paddingTop: 31}}>
@@ -24,7 +32,11 @@ const ProjectsScreen = ({navigation, projects}) => {
                 )}
                 {
                     projects.map(({id,data})=>(
-                        <ProjectCard key={id} id={id} {...data} />
+                        <ProjectCard 
+                            key={id} 
+                            {...data}
+                            onPress={()=> enterProject(id, data.name)} 
+                        />
                     ))
                 }
 
