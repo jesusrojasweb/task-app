@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { View, Text,StyleSheet, TouchableOpacity } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,26 +13,26 @@ import StatisticsScreen from './StatisticsScreen';
 
 const Tab = createBottomTabNavigator();
 
-const Componente = () => {
-    return(
-        <View>
-            <Text>Este es el dashboard</Text>
-        </View>
-    )
-}
+const DashboardScreen = ({navigation,route}) => {
 
-
-const DashboardScreen = ({navigation}) => {
+    const [projects, setProjects] = useState([])
+    
 
     useEffect(()=>{
-        // const unsuscribe = db.collection('projects')
-
-        // return unsuscribe
-    },[])
+        const unsuscribe = db.collection('dashboard').doc(auth.currentUser.uid).collection('projects').onSnapshot(snapshot => (
+            setProjects(
+                snapshot.docs.map(doc=>(
+                    {
+                        id: doc.id,
+                        data: doc.data()
+                    }
+                ))
+        )))
+        return unsuscribe
+    },[route])
 
     useLayoutEffect(()=>{
         navigation.setOptions({
-            title: 'Tus proyectos',
             headerLeft: ()=>(
                 <TouchableOpacity
                     onPress={()=> navigation.navigate('Profile')}
@@ -60,7 +60,7 @@ const DashboardScreen = ({navigation}) => {
                 },
                 style: {
                     backgroundColor: colorBackground,
-                    borderTopWidth: 1,
+                    borderTopWidth: 3,
                     borderTopColor: '#283349'
                 }
             }}
@@ -68,7 +68,7 @@ const DashboardScreen = ({navigation}) => {
         >
             <Tab.Screen
                 name="Proyectos"
-                component={ProjectsScreen}
+                children={()=> <ProjectsScreen projects={projects} navigation={navigation} />}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="home" size={size} color={color} />

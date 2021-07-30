@@ -18,6 +18,24 @@ import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import CreateProjects from './screens/CreateProjects';
+
+function getHeaderTitle(route) {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Proyectos';
+
+  switch (routeName) {
+    case 'Proyectos':
+      return 'Tus Proyectos';
+    case 'Tareas':
+      return 'Tus Tareas';
+    case 'Reloj':
+      return 'Timer';
+    case 'Estadisticas':
+      return 'Estadisticas';
+  }
+}
+
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
@@ -65,6 +83,13 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={DashboardScreen}
+            options={({route}) => ({
+              headerTitle: getHeaderTitle(route)
+            })}
+          />
+          <Stack.Screen
+            name="Create Projects"
+            component={CreateProjects}
           />
           <Stack.Screen
             name="Profile"

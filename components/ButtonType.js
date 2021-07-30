@@ -38,6 +38,7 @@ const styles = (styleParentButton,styleParentText,type) => StyleSheet.create({
         fontFamily: fontSemiBold,
         color: type === 'primary' ? 'white' : colorLight,
         fontSize: 16,
+        textAlign: 'center',
         ...styleParentText,
     }
 })
