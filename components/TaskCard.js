@@ -3,9 +3,17 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import {FontAwesome} from '@expo/vector-icons'
 import { colorBackground, colorText, fontRegular, fontSemiBold } from '../screens/styles/variables'
 
-const TaskCard = ({focus,name,isCompleted,rest,date}) => {
+const TaskCard = (props) => {
+
+    const {focus,name,isCompleted,rest,date,id, navigation} = props
+
+    const goEditTask = () => {
+        navigation.navigate('Create Tasks', props)
+    }
+    
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={goEditTask}>
             <View style={styles.info}>
                 <TouchableOpacity style={styles.checked}></TouchableOpacity>
                 <View  style={styles.texts}>

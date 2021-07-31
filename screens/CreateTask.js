@@ -8,42 +8,72 @@ import { backgroundDefault, colorBackground, colorText, fontSemiBold } from './s
 import DatePicker from 'react-native-datepicker'
 import { auth, db } from '../firebase'
 
-const CreateTask = ({navigation,route}) => {
+const CreateTask = (props) => {
 
     const now = new Date()
-    const {id} = route.params
+    
+    const {
+        navigation,
+        route,
+    } = props
 
-    const [date, setDate] = useState(`${now.getFullYear()}-0${now.getMonth() + 1}-${now.getDate()}`)
-    const [name, setName] = useState('')
-    const [focus, setFocus] = useState(0)
-    const [rest, setRest] = useState(0)
+    const {
+        date = `${now.getFullYear()}-0${now.getMonth() + 1}-${now.getDate()}`,
+        name = '',
+        focus = 0,
+        rest= 0,
+        taskId,
+        projectId
+    } = route.params
+
+    const [dateInput, setDate] = useState(date)
+    const [nameText, setName] = useState(name)
+    const [focusInput, setFocus] = useState(focus)
+    const [restInput, setRest] = useState(rest)
     const [isLoading, setIsLoading] = useState(false)
 
     useLayoutEffect(()=>{
         navigation.setOptions({
-            title: 'Crear Tarea'
+            title: name === '' ? 'Crear Tarea' : 'Editar Tarea'
         })
 
-    })
+    }, [route])
 
     const createTask = async () => {
-        console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n subiendo tarea')
         setIsLoading(true)
-        await db.collection('dashboard').doc(auth.currentUser.uid).collection('tasks').add({
-            name,
-            focus,
-            rest,
-            projectId: id,
-            date,
+        const data = {
+            name: nameText,
+            focus: focusInput,
+            rest: restInput,
+            projectId: projectId ? projectId : route.params.id,
+            date: dateInput,
             isCompleted: false
-        }).then(()=>{
-            navigation.goBack()
-            setIsLoading(false)
-        }).catch((error)=> {
-            alert(error)
-            setIsLoading(false)
-        })
+        }
+
+        if(name === ''){
+            await db.collection('dashboard').doc(auth.currentUser.uid).collection('tasks').add(data)
+
+            .then(()=>{
+                navigation.goBack()
+                setIsLoading(false)
+            }).catch((error)=> {
+                alert(error)
+                setIsLoading(false)
+            })
+        }else{
+            
+            await db.collection('dashboard').doc(auth.currentUser.uid).collection('tasks').doc(taskId).set(data)
+
+            .then(()=>{
+                navigation.goBack()
+                setIsLoading(false)
+            }).catch((error)=> {
+                alert(error)
+                setIsLoading(false)
+            })
+        }
     }
+    
     
 
     return (
@@ -55,13 +85,13 @@ const CreateTask = ({navigation,route}) => {
             <Inputs
                 labelText="Nombre de la Tarea"
                 placeholder="Hacer ejercicio"
-                value={name}
+                value={nameText}
                 onChangeText={(text)=> setName(text)}
                 
             />
             <Text style={styles.label} >Fecha</Text>
             <DatePicker
-                date={date}
+                date={dateInput}
                 mode="date"
                 placerholder="Elegir fecha"
                 minDate={`${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`}
@@ -84,14 +114,14 @@ const CreateTask = ({navigation,route}) => {
                 labelText="Tiempo de enfoque (m)"
                 placeholder="160"
                 type="number"
-                value={focus}
+                value={focusInput}
                 onChangeText={(text)=> setFocus(text)}
             />
             <Inputs
                 labelText="Tiempo de descanso (m)"
                 placeholder="80"
                 type="number"
-                value={rest}
+                value={restInput}
                 onChangeText={(text)=> setRest(text)}
             />
             {isLoading && <ActivityIndicator size="large" color="#FFFFFF" />}
@@ -99,6 +129,7 @@ const CreateTask = ({navigation,route}) => {
                 <ButtonType
                     title='Cancelar'
                     styleParentButton={styles.buttons}
+                    onPress={()=> navigation.goBack()}
                 />
                 <ButtonType
                     title='Guardar'
@@ -129,6 +160,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#363B45',
         borderRadius: 8,
         marginBottom: 15,
+        borderColor: 'transparent'
     },
     buttonContainer:{
         flexDirection: 'row',

@@ -7,7 +7,7 @@ import { colorPrincipal, fontExtra, fontRegular } from './styles/variables'
 
 const TaskListScreen = ({navigation,route}) => {
 
-    const {projectName, id} = route.params
+    let projectName = route?.params?.projectName || '', id = route?.params?.id || ''
 
     const [tasks, setTasks] = useState([])
 
@@ -22,6 +22,8 @@ const TaskListScreen = ({navigation,route}) => {
             )
         })
 
+        console.log()
+
         return unsubscribe
 
     },[route])
@@ -30,10 +32,16 @@ const TaskListScreen = ({navigation,route}) => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {
-                    projectName && (
+                    projectName !== '' && (
                         <Text style={styles.projectName}>
                             Proyecto: <Text style={{fontFamily: fontRegular}}>{projectName}</Text>
                         </Text>
+                    ) 
+                }
+
+                {
+                    tasks[0] === undefined && (
+                        <Text style={styles.textEmpty}>Aun no tienes tareas creadas</Text>
                     )
                 }
 
@@ -42,6 +50,8 @@ const TaskListScreen = ({navigation,route}) => {
                         <TaskCard
                             key={id}
                             {...data}
+                            taskId={id}
+                            navigation={navigation}
                         />
                     ))
                 }
@@ -73,5 +83,11 @@ const styles = StyleSheet.create({
         fontFamily: fontExtra,
         fontSize: 20,
         marginBottom: 30,
+    },
+    textEmpty:{
+        color: 'white',
+        fontFamily: fontRegular,
+        fontSize: 20,
+        marginBottom: 20
     }
 })

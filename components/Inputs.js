@@ -47,5 +47,6 @@ const styles = (isFocus) =>StyleSheet.create({
         fontFamily: fontRegular,
         color: isFocus ? colorLight : colorText,
         bottom: 0,
+        color: 'white'
     }
 })
