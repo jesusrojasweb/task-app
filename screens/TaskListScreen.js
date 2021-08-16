@@ -17,14 +17,13 @@ const TaskListScreen = ({ navigation, route }) => {
       .doc(auth.currentUser.uid)
       .collection("tasks")
       .where("isCompleted", "==", false)
+      .where("projectId", "==", id)
       .onSnapshot((snapshot) => {
         setTasks(
-          snapshot.docs
-            .filter((doc) => doc.data().projectId === id)
-            .map((doc) => ({
-              id: doc.id,
-              data: doc.data(),
-            }))
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
         );
       });
 
@@ -49,14 +48,16 @@ const TaskListScreen = ({ navigation, route }) => {
           <TaskCard key={id} {...data} taskId={id} navigation={navigation} />
         ))}
 
-        <ButtonType
-          title="Crear Tarea"
-          type="primary"
-          styleParentButton={{
-            marginTop: 30,
-          }}
-          onPress={() => navigation.navigate("Create Tasks", { id })}
-        />
+        {projectName !== "" && (
+          <ButtonType
+            title="Crear Tarea"
+            type="primary"
+            styleParentButton={{
+              marginTop: 30,
+            }}
+            onPress={() => navigation.navigate("Create Tasks", { id })}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

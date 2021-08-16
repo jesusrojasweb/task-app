@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+
+    <style>
+        body{
+            height: 100%;
+            width: 100%;
+            background-color: #333;
+        }
+        #countdown{
+            position:relative;
+            margin: auto;
+            margin-top: 100px;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+        }
+        #countdown-number{
+            color: white;
+            display: inline-block;
+            line-height: 40px;
+        }
+        svg{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            transform: rotateY(-180deg) rotateZ(-90deg);
+        }
+        svg circle{
+            stroke-dasharray: 250px;
+            stroke-dashoffset: 0px;
+            stroke-linecap: round;
+            stroke-width: 8px;
+            stroke: white;
+            fill: none;
+            /* animation: countdown 10s linear infinite forwards; */
+        }
+        @keyframes countdown {
+            from {
+                stroke-dashoffset: 0px;
+            }
+            to {
+                stroke-dashoffset: 113px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="countdown">
+        <div id="countdown-number">
+            <svg>
+                <circle r="40" cx="50" cy="50" ></circle>
+            </svg>
+        </div>
+    </div>
+
+    <script></script>
+</body>
+</html>
