@@ -23,6 +23,7 @@ import CreateProjects from "./screens/CreateProjects";
 
 import { LogBox } from "react-native";
 import CreateTask from "./screens/CreateTask";
+import LoadingStart from "./components/LoadingStart";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 LogBox.ignoreLogs(["function body of a different component"]);
@@ -38,8 +39,8 @@ function getHeaderTitle(route) {
       return "Tus Tareas";
     case "Reloj":
       return "Timer";
-    case "Estadisticas":
-      return "Estadisticas";
+    case "Completadas":
+      return "Completadas";
   }
 }
 
@@ -69,11 +70,7 @@ export default function App() {
     Montserrat_800ExtraBold,
   });
   if (!fontsLoaded) {
-    return (
-      <View>
-        <Text>Cargando...</Text>
-      </View>
-    );
+    return <LoadingStart />;
   } else {
     return (
       <NavigationContainer>

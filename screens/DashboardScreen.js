@@ -10,6 +10,7 @@ import ProjectsScreen from "./ProjectsScreen";
 import TaskListScreen from "./TaskListScreen";
 import TimerScreen from "./TimerScreen";
 import StatisticsScreen from "./StatisticsScreen";
+import CompletedScreen from "./CompletedScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -97,8 +98,10 @@ const DashboardScreen = ({ navigation, route }) => {
         }}
       />
       <Tab.Screen
-        name="Estadisticas"
-        component={StatisticsScreen}
+        // name="Estadisticas"
+        // component={StatisticsScreen}
+        name="Completadas"
+        component={CompletedScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="bar-chart" size={size} color={color} />
