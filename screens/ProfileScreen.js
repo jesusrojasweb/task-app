@@ -37,8 +37,8 @@ const ProfileScreen = ({ navigation }) => {
       <Text style={styles.name} h3>
         {auth?.currentUser.displayName}
       </Text>
-      <Text style={styles.tasks}>20 tareas esta semana</Text>
-      <ProfileCards
+      {/* <Text style={styles.tasks}>20 tareas esta semana</Text> */}
+      {/* <ProfileCards
         name="Cambiar Nombre"
         icon="sign-out"
         // onPress={signOutUser}
@@ -52,7 +52,7 @@ const ProfileScreen = ({ navigation }) => {
         name="Cambiar Contraseña"
         icon="sign-out"
         // onPress={signOutUser}
-      />
+      /> */}
       <ProfileCards
         name="Cerrar Sesión"
         icon="sign-out"
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   name: {
     color: "white",
     fontFamily: fontExtra,
-    marginBottom: 4,
+    // marginBottom: 4,
+    marginBottom: 30,
   },
   tasks: {
     color: colorText,
