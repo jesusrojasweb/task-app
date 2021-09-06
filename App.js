@@ -26,6 +26,7 @@ import CreateTask from "./screens/CreateTask";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 LogBox.ignoreLogs(["function body of a different component"]);
+// LogBox.ignoreLogs(['Remote debugger']);
 
 function getHeaderTitle(route) {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "Proyectos";

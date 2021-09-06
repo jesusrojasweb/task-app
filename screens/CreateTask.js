@@ -101,7 +101,9 @@ const CreateTask = (props) => {
         date={dateInput}
         mode="date"
         placerholder="Elegir fecha"
-        minDate={`${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`}
+        minDate={`${now.getFullYear()}-${now.getMonth() + 1}-${
+          now.getDate() - 4
+        }`}
         maxDate={`${now.getFullYear()}-${now.getMonth() + 2}-${now.getDate()}`}
         fontmat="DD-MM-YYYY"
         confirmBtnText="Confirmar"
