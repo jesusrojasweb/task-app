@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "task-app",
-    "slug": "task-app",
+    "name": "seproductivo",
+    "slug": "seproductivo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5857BE"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,8 +22,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#5857BE"
+      },
+      "package": "com.jesusrojasweb.seproductivo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
